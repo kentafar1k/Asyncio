@@ -34,16 +34,45 @@
 #
 # asyncio.run(main())
 
-"""TASK 4"""
-import asyncio
-import random
+# """TASK 4"""
+# import asyncio
+# import random
+#
+# async def get_random_numbers():
+#     await asyncio.sleep(0.1)
+#     return random.randint(1, 100)
+#
+# async def main():
+#     numbers = [await get_random_numbers() for _ in range(10)]
+#     return sum(numbers) // len(numbers)
+#
+# print(asyncio.run(main()))
 
-async def get_random_numbers():
-    await asyncio.sleep(0.1)
-    return random.randint(1, 100)
+
+import asyncio
+import time
+
+
+async def f1():
+    await asyncio.sleep(1)
+    print("f1")
+
+
+async def f2():
+    await asyncio.sleep(2)
+    print("f2")
+
+
+async def f3():
+    await asyncio.sleep(3)
+    print("f3")
+
 
 async def main():
-    numbers = [await get_random_numbers() for _ in range(10)]
-    return sum(numbers) // len(numbers)
+    task = [
+        f1(), f2(), f3()
+    ]
+    await asyncio.gather(*task)
 
-print(asyncio.run(main()))
+
+asyncio.run(main())
